@@ -77,12 +77,12 @@ def runNcu(app_cmd):
         kernel_name = df["Name"][kernel]
         dic['kernel'].append(kernel_name)
         kernel_regex = kernel_name.split('.(<',1)[0]
-        cli_cmd = ncu_cmd + kernel_regex
-        cli_cmd = cli_cmd.split() + app_cmd
-        print(cli_cmd)
-        subprocess.call(cli_cmd)
-        with open('ncu_temp.csv', 'w') as f:
-            process = subprocess.Popen(ncu_csv.split(), stdout=f)
+        # cli_cmd = ncu_cmd + kernel_regex
+        # cli_cmd = cli_cmd.split() + app_cmd
+        # print(cli_cmd)
+        # subprocess.call(cli_cmd)
+        # with open('ncu_temp.csv', 'w') as f:
+        #     process = subprocess.Popen(ncu_csv.split(), stdout=f)
         processKernel(dic)
     return dic
 
