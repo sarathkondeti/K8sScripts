@@ -83,7 +83,7 @@ def runNcu(app_cmd):
         f = open('ncu_temp.csv', 'w')
         process = subprocess.Popen(ncu_csv.split(), stdout=f)
         f.close()
-        time.sleep(1)
+        time.sleep(1)  # sometimes, read_csv in processKernel() doesn't if this sleep() is taken out.
         processKernel(dic)
     return dic
 
@@ -91,7 +91,7 @@ def main():
     app_cmd = parseAppCmd()
     #kernels = runNsysProf(app_cmd)
     dic=runNcu(app_cmd);
-    print(dic)
+    print(pd.DataFrame(dic))
 
 if __name__ == "__main__":
     main()
