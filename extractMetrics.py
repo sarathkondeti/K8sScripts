@@ -9,7 +9,8 @@ print(app_cmd)
 # nsys profile parsing
 #nsys profile -f true -o report ./heartwall ../../data/heartwall/test.avi 1
 nsys_prof = "profile -f true -o nsys_report "
-subprocess.call(["nsys", nsys_prof, app_cmd])
+subprocess.call(["nsys","profile", "-f", "true","-o","nsys_report",
+                "./heartwall", "../../data/heartwall/test.avi", "1"]);
 
 
 # nsys stats --report gpukernsum --format csv --output lol report1.qdrep
