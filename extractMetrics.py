@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import subprocess
 import sys
-
 # Get the app run command
 app_cmd = sys.argv[1:]
 if len(app_cmd)==0:
