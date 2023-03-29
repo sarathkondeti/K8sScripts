@@ -79,9 +79,9 @@ def runNcu(app_cmd):
         cli_cmd = cli_cmd.split() + app_cmd
         print(cli_cmd)
         subprocess.call(cli_cmd)
-        with open('ncu_temp.csv', 'w') as f:
-            process = subprocess.Popen(ncu_csv.split(), stdout=f)
-        close('ncu_temp.csv')
+        f = open('ncu_temp.csv', 'w')
+        process = subprocess.Popen(ncu_csv.split(), stdout=f)
+        f.close()
         processKernel(dic)
     return dic
 
