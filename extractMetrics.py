@@ -48,8 +48,8 @@ kernels = int(input())
 # ------------------------------------------------------------------
 # collect ncu Metrics
 ncu_cmd = "ncu -c 5 -f -o ncu_report "
-ncu_cmd += "--metric " + metrics
-ncu_cmd += "--kernel-name regex:"
+ncu_cmd += " --metric " + metrics
+ncu_cmd += " --kernel-name regex:"
 
 ncu_csv = "ncu --import  ncu_report.ncu-rep --csv"
 ncu_csv = ncu_csv.split()
@@ -60,6 +60,7 @@ for kernel in range(kernels):
     print(kernel_name)
     cli_cmd = ncu_cmd + kernel_regex
     cli_cmd = cli_cmd.split() + app_cmd
+    print(cli_cmd)
     subprocess.call(cli_cmd)
     with open('ncu.csv', 'w') as f:
         process = subprocess.Popen(ncu_csv, stdout=f)
