@@ -16,7 +16,9 @@ print(cli_cmd)
 subprocess.call(cli_cmd)
 
 # nsys kernel stats
-nsys_stats = "nsys stats --report gpukernsum --format csv --output nsys_stat nsys_prof.qdrep"
+nsys_stats = "nsys stats --report gpukernsum"
+            + "--force-overwrite true --force-export true"
+            + " --format csv --output nsys_stat nsys_prof.qdrep";
 cli_cmd = nsys_stats.split()
 print("2/3 running nsys stats kernel")
 print(cli_cmd)
@@ -27,3 +29,8 @@ df = pd.read_csv("nsys_stat_gpukernsum.csv")
 print(df.head(5))
 print("Enter the #kernels for profiling: ",end='');
 kernels = int(input())
+
+# collect ncu Metrics
+for kernel in range(kernels):
+    kernel_name = df.iloc[[kernel],['Name']]
+    print(kernel_name)
