@@ -1,9 +1,13 @@
 #!/usr/bin/python3
 import subprocess
+import sys
 
 # Get the app run command
-print("Enter app run command: ",end='')
-app_cmd = input()
+app_cmd = sys.argv[1:]
+if len(app_cmd)==0:
+    print("please provide app run cmd as argument")
+    exit();
+print(app_cmd)
 
 # nsys profile parsing
 #nsys profile -f true -o report ./heartwall ../../data/heartwall/test.avi 1
