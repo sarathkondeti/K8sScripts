@@ -17,8 +17,8 @@ subprocess.call(cli_cmd)
 
 # nsys kernel stats
 nsys_stats = "nsys stats --report gpukernsum"
-            + "--force-overwrite true --force-export true"
-            + " --format csv --output nsys_stat nsys_prof.qdrep";
+nsys_stats += "--force-overwrite true --force-export true"
+nsys_stats += " --format csv --output nsys_stat nsys_prof.qdrep"
 cli_cmd = nsys_stats.split()
 print("2/3 running nsys stats kernel")
 print(cli_cmd)
