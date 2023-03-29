@@ -48,9 +48,7 @@ def runNsysProf(app_cmd):
 def processKernel(dic):
     metrics_names = metrics.split(',');
     metrics_values=[]
-    df = pd.read_csv("ncu_temp.csv")
-    print(df.head())
-    return
+    df = pd.read_csv("ncu_temp.csv",index_col="Metric Name")
     for metric in metrics_names:
         _df = df.loc[metric]
         sum=0;
