@@ -87,7 +87,7 @@ def runNcu(app_cmd):
 def main():
     app_cmd = parseAppCmd()
     #kernels = runNsysProf(app_cmd)
-    dic=runNcu(2,app_cmd);
+    dic=runNcu(app_cmd);
     print(dic)
 
 if __name__ == "__main__":
