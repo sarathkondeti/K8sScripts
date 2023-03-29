@@ -20,16 +20,6 @@ ncu_cmd += " --kernel-name regex:"
 
 ncu_csv = "ncu --import  ncu_report.ncu-rep --csv"
 
-# helper functions
-def processKernel():
-    metrics_names = metrics.split(',');
-    metrics_values=[]
-    df = pd.read_csv("ncu.csv")
-    for metric in metrics_names:
-        return
-        # _df = df["Name" = metric];
-        # print(_df)
-
 # -----------------------------------------------------------------
 # Get the app run command
 def parseAppCmd():
@@ -57,6 +47,20 @@ def runNsysProf(app_cmd):
     kernels = int(input())
     return kernels
 # ------------------------------------------------------------------
+# ncu helper functions
+def processKernel(dic):
+    metrics_names = metrics.split(',');
+    metrics_values=[]
+    df = pd.read_csv("ncu_temp.csv",index_col="Metric Name")
+    for metric in metrics_names:
+        _df = df.loc[metric]
+        sum=0;
+        count=0;
+        for i in range(len(_df)):
+            sum += _df["Metric Value"][i]
+            count += 1
+        dic[metric].append(sum/count)
+
 # collect ncu Metrics
 def runNcu(kernels):
     dic = {
@@ -74,21 +78,20 @@ def runNcu(kernels):
         kernel_name = df["Name"][kernel]
         dic['kernel'].append(kernel_name)
         kernel_regex = kernel_name.split('.(<',1)[0]
-        # print(kernel_regex)
-        # cli_cmd = ncu_cmd + kernel_regex
-        # cli_cmd = cli_cmd.split() + app_cmd
-        # print(cli_cmd)
-        # subprocess.call(cli_cmd)
-        # with open('ncu.csv', 'w') as f:
-        #     process = subprocess.Popen(ncu_csv.split(), stdout=f)
-        #processKernel(dic)
+        cli_cmd = ncu_cmd + kernel_regex
+        cli_cmd = cli_cmd.split() + app_cmd
+        print(cli_cmd)
+        subprocess.call(cli_cmd)
+        with open('ncu_temp.csv', 'w') as f:
+            process = subprocess.Popen(ncu_csv.split(), stdout=f)
+        processKernel(dic)
     return dic
 
 def main():
     #app_cmd = parseAppCmd()
     #kernels = runNsysProf(app_cmd)
     dic=runNcu(2);
-    print(pd.DataFrame(dic))
+    print(dic)
 
 if __name__ == "__main__":
     main()
