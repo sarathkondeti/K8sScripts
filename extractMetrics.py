@@ -15,6 +15,7 @@ def processKernel():
     metrics_values=[]
     df = pd.read_csv("ncu.csv")
     for metric in metrics_names:
+        return
         # _df = df["Name" = metric];
         # print(_df)
 
