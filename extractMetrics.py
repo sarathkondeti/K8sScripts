@@ -26,4 +26,4 @@ subprocess.call(cli_cmd)
 df = pd.read_csv("nsys_stat_gpukernsum.csv")
 print(df.head(5))
 print("Enter the #kernels for profiling: ",end='');
-kernels = int(input)
+kernels = int(input())
