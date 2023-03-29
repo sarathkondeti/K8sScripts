@@ -39,7 +39,7 @@ ncu_csv = "ncu --import  ncu_report.ncu-rep --csv > ncu.csv"
 ncu_csv = ncu_csv.split()
 for kernel in range(kernels):
     kernel_name = df["Name"][kernel]
-    kernel_regex = kernel_name.spilt('(<',1)[0]
+    kernel_regex = kernel_name.split('(<',1)[0]
     print(kernel_name)
     cli_cmd = ncu_cmd + kernel_regex
     cli_cmd = cli_cmd.split() + app_cmd
