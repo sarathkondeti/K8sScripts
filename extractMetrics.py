@@ -42,10 +42,7 @@ def runNsysProf(app_cmd):
     subprocess.call(cli_cmd)
     # print top ~5 kernels
     df = pd.read_csv("nsys_stat_gpukernsum.csv")
-    print(df.head(5))
-    print("Enter the #kernels for profiling: ",end='');
-    kernels = int(input())
-    return kernels
+
 # ------------------------------------------------------------------
 # ncu helper functions
 def processKernel(dic):
@@ -62,16 +59,16 @@ def processKernel(dic):
         dic[metric].append(sum/count)
 
 # collect ncu Metrics
-def runNcu(kernels):
-    dic = {
-        'runtime(%)':[],
-        'runtime(ns)':[],
-        'kernel':[]
-    }
-    metrics_lst = metrics.split(',')
-    for m in metrics_lst:
-        dic[m] = []
+def runNcu(app_cmd):
     df = pd.read_csv("nsys_stat_gpukernsum.csv")
+    print(df.head(5))
+    print("Enter the #kernels for profiling: ",end='');
+    kernels = int(input())
+
+    dic = {'runtime(%)':[],'runtime(ns)':[],'kernel':[]}
+    for m in metrics.split(','):
+        dic[m] = []
+
     for kernel in range(kernels):
         dic['runtime(%)'].append(df['Time(%)'][kernel])
         dic['runtime(ns)'].append(df['Total Time (ns)'][kernel])
@@ -88,9 +85,9 @@ def runNcu(kernels):
     return dic
 
 def main():
-    #app_cmd = parseAppCmd()
+    app_cmd = parseAppCmd()
     #kernels = runNsysProf(app_cmd)
-    dic=runNcu(2);
+    dic=runNcu(2,app_cmd);
     print(dic)
 
 if __name__ == "__main__":
