@@ -9,7 +9,7 @@ if len(app_cmd)==0:
 # nsys profile parsing
 #nsys profile -f true -o report ./heartwall ../../data/heartwall/test.avi 1
 nsys_prof = "nsys profile -f true -o nsys_report"
-cli_cmd = nsys_prof.split(' ') + app_cmd.split(' ');
+cli_cmd = nsys_prof.split(' ') + app_cmd;
 print("Running command")
 print(cli_cmd)
 #subprocess.call(["nsys","profile", "-f", "true","-o","nsys_report",
