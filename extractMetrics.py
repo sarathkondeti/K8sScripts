@@ -32,5 +32,5 @@ kernels = int(input())
 
 # collect ncu Metrics
 for kernel in range(kernels):
-    kernel_name = df.iloc[[kernel],['Name']]
+    kernel_name = df["Name"][kernel]
     print(kernel_name)
