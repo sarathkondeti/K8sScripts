@@ -61,22 +61,26 @@ def runNsysProf(app_cmd):
 def runNcu(kernels):
     dic = {
         'kernel':[],
+        'runtime%':[],
         'runtime':[]
     }
     metrics_lst = metrics.split(',')
     for m in metrics_lst:
         dic[m] = []
-
+    df = pd.read_csv("nsys_stat_gpukernsum.csv")
     for kernel in range(kernels):
         kernel_name = df["Name"][kernel]
         kernel_regex = kernel_name.split('.(<',1)[0]
-        print(kernel_regex)
-        cli_cmd = ncu_cmd + kernel_regex
-        cli_cmd = cli_cmd.split() + app_cmd
-        print(cli_cmd)
-        subprocess.call(cli_cmd)
-        with open('ncu.csv', 'w') as f:
-            process = subprocess.Popen(ncu_csv.split(), stdout=f)
+        runtime = df['Total Time (ns)'][kernel]
+        percent = df['Time(%)'][kernel]
+        print(kernel_name,kernel_regex,runtime,percent)
+        # print(kernel_regex)
+        # cli_cmd = ncu_cmd + kernel_regex
+        # cli_cmd = cli_cmd.split() + app_cmd
+        # print(cli_cmd)
+        # subprocess.call(cli_cmd)
+        # with open('ncu.csv', 'w') as f:
+        #     process = subprocess.Popen(ncu_csv.split(), stdout=f)
         #processKernel(dic)
     return dic
 
