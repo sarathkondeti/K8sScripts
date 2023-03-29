@@ -2,6 +2,7 @@
 import subprocess
 import sys
 import pandas as pd
+import time
 #parameters
 metrics = "smsp__inst_executed.avg.per_cycle_active,"
 metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
@@ -82,6 +83,7 @@ def runNcu(app_cmd):
         f = open('ncu_temp.csv', 'w')
         process = subprocess.Popen(ncu_csv.split(), stdout=f)
         f.close()
+        time.sleep(1)
         processKernel(dic)
     return dic
 
