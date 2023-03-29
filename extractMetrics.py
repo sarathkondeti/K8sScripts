@@ -31,6 +31,18 @@ print("Enter the #kernels for profiling: ",end='');
 kernels = int(input())
 
 # collect ncu Metrics
+ncu_cmd = "ncu -c 5 -f -o ncu_report "
+nuc_cmd += "--metric smsp__inst_executed.avg.per_cycle_active,smsp__sass_average_branch_targets_threads_uniform.pct,lts__t_sector_hit_rate.pct,smsp__thread_inst_executed_per_inst_executed.ratio "
+ncu_cmd += "--kernel-name regex:" + kernel
+
+ncu_csv = "ncu --import  ncu_report.ncu-rep --csv > ncu.csv"
+ncu_csv = ncu_csv.split()
 for kernel in range(kernels):
     kernel_name = df["Name"][kernel]
+    kernel_regex = kernel_name.spilt('(<',1)[0]
     print(kernel_name)
+    cli_cmd = ncu_cmd + kernel_regex
+    cli_cmd = cli_cmd.split() + app_cmd
+    subprocess.call(cli_cmd)
+    subprocess.call(ncu_csv)
+    
