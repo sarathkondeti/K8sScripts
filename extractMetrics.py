@@ -88,7 +88,7 @@ def main():
     #app_cmd = parseAppCmd()
     #kernels = runNsysProf(app_cmd)
     dic=runNcu(2);
-    print(pd.Dataframe(dic))
+    print(pd.DataFrame(dic))
 
 if __name__ == "__main__":
     main()
