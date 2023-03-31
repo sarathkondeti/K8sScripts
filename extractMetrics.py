@@ -66,15 +66,18 @@ def runNcu(app_cmd):
     print("Enter the #kernels for profiling: ",end='');
     kernels = int(input())
 
-    dic = {'runtime(%)':[],'runtime(ns)':[],'kernel':[]}
+    dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[]}
     for m in metrics.split(','):
         dic[m] = []
 
     for kernel in range(kernels):
-        dic['runtime(%)'].append(df['Time(%)'][kernel])
-        dic['runtime(ns)'].append(df['Total Time (ns)'][kernel])
+        dic['time(%)'].append(df['Time(%)'][kernel])
+        dic['totaltime(ns)'].append(df['Total Time (ns)'][kernel])
+        dic['instances'].append(df['Instances'][kernel])
+        dic['avgtime(ns)'].append(df['Average (ns)'][kernel])
         kernel_name = df["Name"][kernel]
         dic['kernel'].append(kernel_name)
+
         kernel_regex = kernel_name.split('.(<',1)[0]
         cli_cmd = ncu_cmd + kernel_regex
         cli_cmd = cli_cmd.split() + app_cmd
@@ -83,15 +86,18 @@ def runNcu(app_cmd):
         f = open('ncu_temp.csv', 'w')
         process = subprocess.Popen(ncu_csv.split(), stdout=f)
         f.close()
-        time.sleep(1)  # sometimes, read_csv in processKernel() doesn't if this sleep() is taken out.
+        time.sleep(1)  # sometimes, read_csv in processKernel() doesn't if this sleep() is removed.
         processKernel(dic)
     return dic
 
 def main():
     app_cmd = parseAppCmd()
-    #kernels = runNsysProf(app_cmd)
-    dic=runNcu(app_cmd);
-    print(pd.DataFrame(dic))
+    runNsysProf(app_cmd)
+    dic=runNcu(app_cmd)
+    df = pd.DataFrame(dic)
+    print("Enter output file name: ",end='')
+    output_file = input()
+    df.to_csv(output_file+".csv")
 
 if __name__ == "__main__":
     main()
