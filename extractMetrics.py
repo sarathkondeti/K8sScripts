@@ -57,7 +57,7 @@ def processKernel(dic):
         for i in range(len(_df)):
             sum += _df["Metric Value"][i]
             count += 1
-        dic[metric].append(sum/count)
+        dic[metric].append("{:.2f}".format(sum/count))
 
 # collect ncu Metrics
 def runNcu(app_cmd):
