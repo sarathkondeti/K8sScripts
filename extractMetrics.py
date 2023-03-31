@@ -92,9 +92,9 @@ def runNcu(app_cmd):
     kernels = int(input())
 
     #dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[]}
-    for m in metrics.split(','):
-        dic[m] = []
-
+    # for m in metrics.split(','):
+    #     dic[m] = []
+    dic = {}
     for kernel in range(kernels):
         dic['time(%)'].append(df['Time(%)'][kernel])
         dic['totaltime(ns)'].append(df['Total Time (ns)'][kernel])
