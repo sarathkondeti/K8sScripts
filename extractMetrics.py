@@ -91,10 +91,9 @@ def runNcu(app_cmd):
     print("Enter the #kernels for profiling: ",end='');
     kernels = int(input())
 
-    #dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[]}
-    # for m in metrics.split(','):
-    #     dic[m] = []
-    dic = {}
+    dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[],
+            'ipc':[],'divergence':[],'glbefficiency':[],'warpefficiency':[],'l2hitrate':[],'compmemratio':[]}
+
     for kernel in range(kernels):
         dic['time(%)'].append(df['Time(%)'][kernel])
         dic['totaltime(ns)'].append(df['Total Time (ns)'][kernel])
