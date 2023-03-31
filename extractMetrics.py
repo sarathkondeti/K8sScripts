@@ -6,7 +6,7 @@ import time
 #parameters
 metrics = "smsp__inst_executed.avg.per_cycle_active,"
 metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
-metrics+= "lts__t_sector_hit_rate.pct,"
+metrics+= "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,"
 metrics+= "smsp__thread_inst_executed_per_inst_executed.ratio"
 
 sections = " --section SpeedOfLight --section MemoryWorkloadAnalysis "
@@ -50,17 +50,39 @@ def runNsysProf(app_cmd):
 # ------------------------------------------------------------------
 # ncu helper functions
 def processKernel(dic):
-    metrics_names = metrics.split(',');
-    metrics_values=[]
-    df = pd.read_csv("ncu_temp.csv",index_col="Metric Name")
-    for metric in metrics_names:
-        _df = df.loc[metric]
-        sum=0;
-        count=0;
-        for i in range(len(_df)):
-            sum += _df["Metric Value"][i]
-            count += 1
-        dic[metric].append("{:.2f}".format(sum/count))
+    df = pd.read_csv("ncu_temp.csv")
+
+    _df = df[df["Metric Name"] == "smsp__inst_executed.avg.per_cycle_active"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    dic["ipc"].append("{:.2f}".format(_df['Metric Value']['mean']))
+
+    _df = df[df["Metric Name"] == "smsp__sass_average_branch_targets_threads_uniform.pct"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    dic["divergence"].append("{:.2f}".format(_df['Metric Value']['mean']))
+
+    _df = df[df["Metric Name"] == "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    dic["glbefficiency"].append("{:.2f}".format(_df['Metric Value']['mean']))
+
+    _df = df[df["Metric Name"] == "smsp__thread_inst_executed_per_inst_executed.ratio"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    dic["warpefficiency"].append("{:.2f}".format(_df['Metric Value']['mean']))
+
+    _df = df[df["Metric Name"] == "L2 Hit Rate"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    dic["l2hitrate"].append("{:.2f}".format(_df['Metric Value']['mean']))
+
+    _df = df[df["Metric Name"] == "Compute (SM) [%]"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    compute = _df['Metric Value']['mean']
+    _df = df[df["Metric Name"] == "Memory [%]"]
+    _df = _df.aggregate({"Metric Value":['mean']})
+    memory = _df['Metric Value']['mean']
+    dic["compmemratio"].append("{:.2f}".format(compute/memory))
+
+
+
+
 
 # collect ncu Metrics
 def runNcu(app_cmd):
@@ -69,7 +91,7 @@ def runNcu(app_cmd):
     print("Enter the #kernels for profiling: ",end='');
     kernels = int(input())
 
-    dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[]}
+    #dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[]}
     for m in metrics.split(','):
         dic[m] = []
 
