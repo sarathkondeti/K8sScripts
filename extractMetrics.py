@@ -9,6 +9,9 @@ metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
 metrics+= "lts__t_sector_hit_rate.pct,"
 metrics+= "smsp__thread_inst_executed_per_inst_executed.ratio"
 
+sections = " --section SpeedOfLight --section MemoryWorkloadAnalysis "
+
+
 nsys_prof = "nsys profile -f true -o nsys_prof"
 
 nsys_stats = "nsys stats --report gpukernsum "
@@ -16,7 +19,7 @@ nsys_stats += "--force-overwrite true --force-export true "
 nsys_stats += "--format csv --output nsys_stat nsys_prof.qdrep"
 
 ncu_cmd = "ncu -c 5 -f -o ncu_report "
-ncu_cmd += " --metric " + metrics
+ncu_cmd += " --metric " + metrics + sections
 ncu_cmd += " --kernel-name regex:"
 
 ncu_csv = "ncu --import  ncu_report.ncu-rep --csv"
@@ -79,7 +82,7 @@ def runNcu(app_cmd):
         dic['kernel'].append(kernel_name)
 
         kernel_regex = kernel_name.split('.(<',1)[0]
-        cli_cmd = ncu_cmd + kernel_regex
+        cli_cmd = ncu_cmd + kernel_regex +
         cli_cmd = cli_cmd.split() + app_cmd
         print(cli_cmd)
         subprocess.call(cli_cmd)
