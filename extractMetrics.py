@@ -18,7 +18,7 @@ nsys_stats = "nsys stats --report gpukernsum "
 nsys_stats += "--force-overwrite true --force-export true "
 nsys_stats += "--format csv --output nsys_stat nsys_prof.qdrep"
 
-ncu_cmd = "ncu -c 5 -f -o ncu_report "
+ncu_cmd = "ncu -c 5 -s 10 -f -o ncu_report "
 ncu_cmd += " --metric " + metrics + sections
 ncu_cmd += " --kernel-name regex:"
 
@@ -79,9 +79,6 @@ def processKernel(dic):
     _df = _df.aggregate({"Metric Value":['mean']})
     memory = _df['Metric Value']['mean']
     dic["compmemratio"].append("{:.2f}".format(compute/memory))
-
-
-
 
 
 # collect ncu Metrics
