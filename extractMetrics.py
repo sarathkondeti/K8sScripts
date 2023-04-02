@@ -4,24 +4,18 @@ import sys
 import pandas as pd
 import time
 #parameters
-metrics = "smsp__inst_executed.avg.per_cycle_active,"
-metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
-metrics+= "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,"
-metrics+= "smsp__thread_inst_executed_per_inst_executed.ratio"
-
-sections = " --section SpeedOfLight --section MemoryWorkloadAnalysis "
-
-
 nsys_prof = "nsys profile -f true -o nsys_prof"
-
 nsys_stats = "nsys stats --report gpukernsum "
 nsys_stats += "--force-overwrite true --force-export true "
 nsys_stats += "--format csv --output nsys_stat nsys_prof.qdrep"
 
-ncu_cmd = "ncu -c 5 -s 10 -f -o ncu_report "
+metrics = "smsp__inst_executed.avg.per_cycle_active,"
+metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
+metrics+= "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,"
+metrics+= "smsp__thread_inst_executed_per_inst_executed.ratio"
+sections = " --section SpeedOfLight --section MemoryWorkloadAnalysis "
+ncu_cmd = "ncu -f -o ncu_report "
 ncu_cmd += " --metric " + metrics + sections
-ncu_cmd += " --kernel-name regex:"
-
 ncu_csv = "ncu --import  ncu_report.ncu-rep --csv"
 
 # -----------------------------------------------------------------
@@ -95,9 +89,13 @@ def runNcu(app_cmd):
         kernel_name = df["Name"][kernel]
         dic['kernel'].append(kernel_name)
         dic['avgtime(ns)'].append(df['Average (ns)'][kernel])
-
         kernel_regex = kernel_name.split('(',1)[0]
-        cli_cmd = ncu_cmd + kernel_regex
+        print("capture,skips (c,s): ",end='');
+        c,s = input().split(',')
+
+        cli_cmd = ncu_cmd
+        cli_cmd+= " -c " + c + " -s " + s
+        cli_cmd+=  " --kernel-name regex:" + kernel_regex
         cli_cmd = cli_cmd.split() + app_cmd
         print(cli_cmd)
         subprocess.call(cli_cmd)
