@@ -95,9 +95,9 @@ def runNcu(app_cmd):
         dic['time(%)'].append(df['Time(%)'][kernel])
         dic['totaltime(ns)'].append(df['Total Time (ns)'][kernel])
         dic['instances'].append(df['Instances'][kernel])
-        dic['avgtime(ns)'].append(df['Average (ns)'][kernel])
         kernel_name = df["Name"][kernel]
         dic['kernel'].append(kernel_name)
+        dic['avgtime(ns)'].append(df['Average (ns)'][kernel])
 
         kernel_regex = kernel_name.split('.(<',1)[0]
         cli_cmd = ncu_cmd + kernel_regex
