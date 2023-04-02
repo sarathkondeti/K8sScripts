@@ -44,9 +44,6 @@ def runNsysProf(app_cmd):
     print("2/3 running nsys stats kernel")
     print(cli_cmd)
     subprocess.call(cli_cmd)
-    # print top ~5 kernels
-    df = pd.read_csv("nsys_stat_gpukernsum.csv")
-
 # ------------------------------------------------------------------
 # ncu helper functions
 def processKernel(dic):
