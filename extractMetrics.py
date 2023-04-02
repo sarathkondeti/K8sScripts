@@ -119,6 +119,7 @@ def main():
     print("Enter output file name: ",end='')
     output_file = input()
     df.to_csv(output_file+".csv")
+    subprocess.call(["rm","ncu*","nsys*"])
 
 if __name__ == "__main__":
     main()
