@@ -1,0 +1,3 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,78.5,1501525,10,150152.5,"vlc_encode_kernel_sm64huff(unsigned int *, const unsigned int *, const unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *, unsigned int *)",0.23,97.34,391.81,28.76,91.20,5.60
+1,13.6,260065,32,8127.0,"histo_kernel(unsigned char *, long, unsigned int *)",0.13,100.00,550.00,32.00,97.94,1.46

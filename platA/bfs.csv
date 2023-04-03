@@ -1,0 +1,3 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,84.6,826556,12,68879.7,"Kernel(Node *, int *, bool *, bool *, bool *, int *, int)",0.10,71.02,16.77,8.02,75.32,0.70
+1,15.4,150622,12,12551.8,"Kernel2(bool *, bool *, bool *, bool *, int)",0.15,0.00,100.00,21.16,72.52,1.00

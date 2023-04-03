@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,134206,5,26841.2,"dynproc_kernel(int, int *, int *, int *, int, int, int, int)",0.25,100.00,74.77,31.96,21.83,0.76

@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,303096006,3900,77716.9,"kernel(int, float *, float *, float *, float *)",0.05,100.00,12.50,1.06,26.96,3.03

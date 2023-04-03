@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,3232,1,3232.0,"euclid(latLong *, float *, int, float, float)",0.07,100.00,50.00,31.99,39.03,0.18
