@@ -96,7 +96,7 @@ def runNcu(app_cmd):
 
         cli_cmd = ncu_cmd
         cli_cmd+= " -c " + c + " -s " + s
-        cli_cmd+=  " --kernel-name regex:" + kernel_regex
+        cli_cmd+=  " --kernel-name " + kernel_regex
         cli_cmd = cli_cmd.split() + app_cmd
         print(cli_cmd)
         subprocess.call(cli_cmd)
