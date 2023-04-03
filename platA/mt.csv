@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,78.5,455262,11,41387.5,"void gen_mtgp<curandStateMtgp32, float, int, &curand_uniform_noargs<curandStateMtgp32>, rng_config<curandStateMtgp32, (curandOrdering)101>>(T1 *, T2 *, unsigned long, unsigned long, T3)",0.28,100.00,64.63,31.93,76.17,0.93

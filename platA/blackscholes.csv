@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,73051075,512,142677.9,"BlackScholesGPU(float2 *, float2 *, float2 *, float2 *, float2 *, float, float, int)",0.26,100.00,100.00,32.00,40.05,0.34

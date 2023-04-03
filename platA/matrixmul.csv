@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,24332879,301,80840.1,"void MatrixMulCUDA<(int)32>(float *, float *, float *, int, int)",0.19,100.00,100.00,32.00,92.96,1.00

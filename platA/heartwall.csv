@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,71632394,20,3581619.7,kernel(),0.24,58.02,54.43,25.03,77.10,1.00

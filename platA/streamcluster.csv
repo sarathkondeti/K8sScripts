@@ -1,0 +1,2 @@
+,time(%),totaltime(ns),instances,avgtime(ns),kernel,ipc,divergence,glbefficiency,warpefficiency,l2hitrate,compmemratio
+0,100.0,203713737,1611,126451.7,"kernel_compute_cost(int, int, long, Point *, int, int, float *, float *, int *, bool *)",0.08,96.02,77.56,31.73,2.96,0.18
