@@ -76,22 +76,23 @@ def processKernel(dic):
 def runNcu(app_cmd):
     df = pd.read_csv("nsys_stat_gpukernsum.csv")
     print(df.head(5))
-    print("Enter the #kernels for profiling: ",end='');
-    kernels = int(input())
-
+    print("Enter the kernels for profiling: ",end='');
+    #kernels = int(input())
+    kernels = input().split(',')
     dic = {'time(%)':[],'totaltime(ns)':[],'instances':[],'avgtime(ns)':[],'kernel':[],
             'ipc':[],'divergence':[],'glbefficiency':[],'warpefficiency':[],'l2hitrate':[],'compmemratio':[]}
 
-    for kernel in range(kernels):
+    for kernel in range(len(kernels)):
+        kernel_regex = kernels[kernel]
         dic['time(%)'].append(df['Time(%)'][kernel])
         dic['totaltime(ns)'].append(df['Total Time (ns)'][kernel])
         dic['instances'].append(df['Instances'][kernel])
         kernel_name = df["Name"][kernel]
+        #kernel_regex = kernel_name.split('(',1)[0]
         dic['kernel'].append(kernel_name)
         dic['avgtime(ns)'].append(df['Average (ns)'][kernel])
-        kernel_regex = kernel_name.split('(',1)[0]
-        print("capture,skips (c,s): ",end='');
-        c,s = input().split(',')
+        print(kernel_regex," skips,captures (s,c): ",end='');
+        s,c = input().split(',')
 
         cli_cmd = ncu_cmd
         cli_cmd+= " -c " + c + " -s " + s
