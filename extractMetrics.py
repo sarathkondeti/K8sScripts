@@ -5,17 +5,17 @@ import pandas as pd
 import time
 #parameters
 nsys_prof = "nsys profile -f true -o nsys_prof"
-nsys_stats = "nsys stats --report gpukernsum "
-nsys_stats += "--force-overwrite true --force-export true "
-nsys_stats += "--format csv --output nsys_stat nsys_prof.qdrep"
+nsys_stats = "nsys stats --report gpukernsum " \
+             + "--force-overwrite true --force-export true " \
+             + "--format csv --output nsys_stat nsys_prof.qdrep"
 
-metrics = "smsp__inst_executed.avg.per_cycle_active,"
-metrics+= "smsp__sass_average_branch_targets_threads_uniform.pct,"
-metrics+= "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct,"
-metrics+= "smsp__thread_inst_executed_per_inst_executed.ratio"
+metrics = "smsp__inst_executed.avg.per_cycle_active," \
+            + "smsp__sass_average_branch_targets_threads_uniform.pct," \
+            + "smsp__sass_average_data_bytes_per_sector_mem_global_op_ld.pct," \
+            + "smsp__thread_inst_executed_per_inst_executed.ratio"
 sections = " --section SpeedOfLight --section MemoryWorkloadAnalysis "
-ncu_cmd = "ncu -f -o ncu_report "
-ncu_cmd += " --metric " + metrics + sections
+ncu_cmd = "ncu -f -o ncu_report " \
+         + " --metric " + metrics + sections
 ncu_csv = "ncu --import  ncu_report.ncu-rep --csv"
 
 # -----------------------------------------------------------------
